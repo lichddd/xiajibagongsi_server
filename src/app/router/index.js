@@ -1,10 +1,16 @@
 import Router from 'koa-router'
 import controler from '../controler'
-let home = new Router()
-home.get('zhihu/themes', controler.themes)
-    .get(`zhihu/theme/:id`,controler.theme)
-    .get(`zhihu/news/latest`,controler.latest)
-    .get(`zhihu/news/:id`,controler.news);
+
+let homepage = new Router()
+homepage.get('uploads', controler.homepage.uploads);
+
+let admin = new Router()
+admin.get('uploads', controler.admin.uploads)
+     .post('upload', controler.admin.upload);
+
 let router = new Router();
-router.use('/', home.routes(), home.allowedMethods())
+router.use('/', homepage.routes(), homepage.allowedMethods());
+router.use('/admin/', admin.routes(), admin.allowedMethods())
+
+
 export default router;

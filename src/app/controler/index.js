@@ -1,22 +1,8 @@
-import Router from 'koa-router'
 import model from '../model'
+import admin from './admin'
+import homepage from './homepage'
 class Controler{
-  static async themes(ctx)
-  {
-    ctx.body=await model.getData(`themes`);
-  }
-  static async theme(ctx)
-  {
-    ctx.body=await model.getData(`theme/${ctx.params.id}`);
-  }
-  static async latest(ctx)
-  {
-    ctx.body=await model.getData(`news/latest`);
-  }
-  static async news(ctx)
-  {
-    ctx.body=await model.getData(`news/${ctx.params.id}`);
-  }
-
+  static admin = admin;
+  static homepage = homepage;
 }
 export default Controler;
