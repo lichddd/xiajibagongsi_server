@@ -6,6 +6,7 @@ homepage.get('uploads', controler.homepage.uploads);
 
 let admin = new Router()
 admin.get('uploads', controler.admin.uploads)
+     .del('deluploaded/:name', controler.admin.deluploaded)
      .post('upload', controler.admin.upload);
 
 let router = new Router();

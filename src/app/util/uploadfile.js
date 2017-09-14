@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 class UploadFile{
-  static upload(ctx)
+  static upload(file)
   {
     try{
       fs.statSync(path.join(__dirname,'../../../uploads/'));
@@ -12,15 +12,15 @@ class UploadFile{
     }
 
 
-    let file=ctx.request.body.files.file;
+
     const reader = fs.createReadStream(file.path);
     const stream = fs.createWriteStream(path.join(__dirname,'../../../uploads/', Math.random().toString()));
     reader.pipe(stream);
   }
-  static getUploads(ctx)
+  static getUploads()
   {
 
-    let dir = fs.readdirSync(path.join(__dirname,'../../../../uploads/'));
+    let dir = fs.readdirSync(path.join(__dirname,'../../../uploads/'));
     let arr=[];
     let allsize=0;
     dir.forEach((f)=>{
@@ -28,7 +28,11 @@ class UploadFile{
       arr.push(Object.assign({name:f},s));
       allsize+=s.size;
     });
-    ctx.body={allsize:allsize,list:arr};
+    return {allsize:allsize,list:arr};
+  }
+  static delUploaded(name)
+  {
+      fs.unlinkSync(path.join(__dirname,'../../../uploads/',name))
   }
 }
 export default UploadFile;

@@ -9,7 +9,7 @@ app.use(async (ctx,next)=>{
   try {await next();}
   catch (e) {
     console.error(e);
-    ctx.body=e;
+    ctx.body={code:1,desc:e};
   }
   finally {}
 });
