@@ -3,8 +3,15 @@ import uploadfile from '../util/uploadfile'
 class Admin{
   static async upload(ctx)
   {
-    uploadfile.upload(ctx.request.body.files.file);
-    ctx.body={code:0};
+    let urllist=[];
+    for (var file in ctx.request.body.files) {
+      if (ctx.request.body.files[file].path) {
+          let pre_uri=process.env.NODE_ENV=="development"?"http://localhost:8081/":"";
+          urllist.push(pre_uri+uploadfile.upload(ctx.request.body.files[file]));
+      }
+    }
+
+    ctx.body=Object.assign({code:0},{errno: 0,data: urllist,});
   }
   static async uploads(ctx)
   {

@@ -14,8 +14,10 @@ class UploadFile{
 
 
     const reader = fs.createReadStream(file.path);
-    const stream = fs.createWriteStream(path.join(__dirname,'../../../uploads/', Math.random().toString()));
+    let newname=Math.random().toString();
+    const stream = fs.createWriteStream(path.join(__dirname,'../../../uploads/', newname));
     reader.pipe(stream);
+    return newname;
   }
   static getUploads()
   {
