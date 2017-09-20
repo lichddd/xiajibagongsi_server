@@ -4,29 +4,26 @@ class UploadFile{
   static upload(file)
   {
     try{
-      fs.statSync(path.join(__dirname,'../../../uploads/'));
+      fs.statSync(path.resolve('./uploads/'));
     }
     catch(e)
     {
-      fs.mkdirSync(path.join(__dirname,'../../../uploads/'));
+      fs.mkdirSync(path.resolve('./uploads/'));
     }
-
-
-
     const reader = fs.createReadStream(file.path);
     let newname=Math.random().toString();
-    const stream = fs.createWriteStream(path.join(__dirname,'../../../uploads/', newname));
+    const stream = fs.createWriteStream(path.resolve('./uploads/', newname));
     reader.pipe(stream);
     return newname;
   }
   static getUploads()
   {
 
-    let dir = fs.readdirSync(path.join(__dirname,'../../../uploads/'));
+    let dir = fs.readdirSync(path.resolve('./uploads/'));
     let arr=[];
     let allsize=0;
     dir.forEach((f)=>{
-      let s=fs.statSync(path.join(__dirname,'../../../uploads/',f))
+      let s=fs.statSync(path.resolve('./uploads/',f))
       arr.push(Object.assign({name:f},s));
       allsize+=s.size;
     });
@@ -34,7 +31,7 @@ class UploadFile{
   }
   static delUploaded(name)
   {
-      fs.unlinkSync(path.join(__dirname,'../../../uploads/',name))
+      fs.unlinkSync(path.resolve('./uploads/',name))
   }
 }
 export default UploadFile;

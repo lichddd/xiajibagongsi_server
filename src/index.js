@@ -5,17 +5,18 @@ import router from './app/router'
 import bodyParser from 'koa-bodyparser'
 import koa_static from 'koa-static'
 let app = new Koa();
+app.use(koa_static(path.join( __dirname,  '../web')));
+app.use(koa_static(path.join( __dirname,  '../uploads')));
 app.use(async (ctx,next)=>{
   try {await next();}
   catch (e) {
     console.error(e);
-    ctx.body={code:1,desc:e};
+    ctx.body=Object.assign({code:1,desc:e.toString()},ctx.body);
   }
-  finally {}
+  ctx.body=Object.assign({code:0},ctx.body);
 });
 app.use(koaBody({ multipart: true }));
-app.use(koa_static(path.join( __dirname,  '../web')));
-app.use(koa_static(path.join( __dirname,  '../uploads')));
+
 app.use(async (ctx,next)=>{
     if (ctx.cookies.get("token")) {
       console.log(ctx.cookies.get("token"));

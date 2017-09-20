@@ -1,10 +1,21 @@
 import http from 'http'
 import low from 'lowdb'
+import path from 'path'
+import fs from 'fs'
 import FileSync from 'lowdb/adapters/FileSync'
 
-const adapter = new FileSync('db.json')
+try{
+  fs.statSync(path.resolve('./db/'));
+}
+catch(e)
+{
+  fs.mkdirSync(path.resolve('./db/'));
+}
+const adapter = new FileSync('db/main.json')
 const db = low(adapter)
-
+const newsjson = new FileSync('db/news.json')
+const newsdb = low(newsjson)
+newsdb.defaults({ news: []}).write()
 // db.defaults({ posts: [], user: {} })
 //   .write()
 

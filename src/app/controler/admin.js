@@ -1,5 +1,6 @@
 import model from '../model'
 import uploadfile from '../util/uploadfile'
+import news from '../model/news'
 class Admin{
   static async upload(ctx)
   {
@@ -11,16 +12,31 @@ class Admin{
       }
     }
 
-    ctx.body=Object.assign({code:0},{errno: 0,data: urllist,});
+    ctx.body={errno: 0,data: urllist,};
   }
   static async uploads(ctx)
   {
-    ctx.body=Object.assign({code:0},uploadfile.getUploads());
+    ctx.body=uploadfile.getUploads();
   }
   static async deluploaded(ctx)
   {
     uploadfile.delUploaded(ctx.params.name);
-    ctx.body={code:0};
+  }
+  static async editnews(ctx)
+  {
+    news.editData(ctx.params,ctx.request.body);
+  }
+  static async addnews(ctx)
+  {
+    news.addData(ctx.request.body);
+  }
+  static async delnews(ctx)
+  {
+    news.delData(ctx.params);
+  }
+  static async getnews(ctx)
+  {
+    ctx.body=news.getData(ctx.query);
   }
 }
 export default Admin;
