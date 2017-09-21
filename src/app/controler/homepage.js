@@ -3,7 +3,7 @@ import uploadfile from '../util/uploadfile'
 class HomePage{
   static async uploads(ctx)
   {
-    uploadfile.getUploads(ctx);
+    ctx.body=uploadfile.getUploads(ctx);
   }
 }
 export default HomePage;

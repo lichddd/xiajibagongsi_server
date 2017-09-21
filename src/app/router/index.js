@@ -1,10 +1,11 @@
 import Router from 'koa-router'
 import controler from '../controler'
 
-let homepage = new Router()
+let homepage = new Router();
 homepage.get('uploads', controler.homepage.uploads);
-
-let admin = new Router()
+let login = new Router();
+login.post('login', controler.login.login);
+let admin = new Router();
 admin.get('uploads', controler.admin.uploads)
      .del('deluploaded/:name', controler.admin.deluploaded)
      .post('upload', controler.admin.upload)
@@ -15,7 +16,7 @@ admin.get('uploads', controler.admin.uploads)
 
 let router = new Router();
 router.use('/', homepage.routes(), homepage.allowedMethods());
-router.use('/admin/', admin.routes(), admin.allowedMethods())
-
+router.use('/admin/', admin.routes(), admin.allowedMethods());
+router.use('/', login.routes(), login.allowedMethods());
 
 export default router;

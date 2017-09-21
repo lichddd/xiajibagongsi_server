@@ -1,15 +1,10 @@
 import fs from 'fs'
 import path from 'path'
+import fileutil from './fileutil'
+fileutil.mkdirIfNotExist('./uploads/');
 class UploadFile{
   static upload(file)
   {
-    try{
-      fs.statSync(path.resolve('./uploads/'));
-    }
-    catch(e)
-    {
-      fs.mkdirSync(path.resolve('./uploads/'));
-    }
     const reader = fs.createReadStream(file.path);
     let newname=Math.random().toString();
     const stream = fs.createWriteStream(path.resolve('./uploads/', newname));

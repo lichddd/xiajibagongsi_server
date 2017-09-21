@@ -1,6 +1,5 @@
 import model from '../model'
 import uploadfile from '../util/uploadfile'
-import news from '../model/news'
 class Admin{
   static async upload(ctx)
   {
@@ -24,19 +23,19 @@ class Admin{
   }
   static async editnews(ctx)
   {
-    news.editData(ctx.params,ctx.request.body);
+    model.news.editData(ctx.params,ctx.request.body);
   }
   static async addnews(ctx)
   {
-    news.addData(ctx.request.body);
+    model.news.addData(ctx.request.body);
   }
   static async delnews(ctx)
   {
-    news.delData(ctx.params);
+    model.news.delData(ctx.params);
   }
   static async getnews(ctx)
   {
-    ctx.body=news.getData(ctx.query);
+    ctx.body=model.news.getData(ctx.query);
   }
 }
 export default Admin;

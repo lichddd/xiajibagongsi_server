@@ -4,6 +4,7 @@ import koaBody from 'koa-body'
 import router from './app/router'
 import bodyParser from 'koa-bodyparser'
 import koa_static from 'koa-static'
+import token from './app/token'
 let app = new Koa();
 app.use(koa_static(path.join( __dirname,  '../web')));
 app.use(koa_static(path.join( __dirname,  '../uploads')));
@@ -16,16 +17,7 @@ app.use(async (ctx,next)=>{
   ctx.body=Object.assign({code:0},ctx.body);
 });
 app.use(koaBody({ multipart: true }));
-
-app.use(async (ctx,next)=>{
-    if (ctx.cookies.get("token")) {
-      console.log(ctx.cookies.get("token"));
-      await next();
-    } else {
-      ctx.cookies.set("token","token");
-      throw "傻逼，你没登录";
-    }
-});
+app.use(token.token);
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
 app.listen(8081);
