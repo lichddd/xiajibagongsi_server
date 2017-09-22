@@ -1,3 +1,5 @@
+import crypto from 'crypto'
+import model from '../model'
 class Token {
     static tokenUris=["admin"];
     static async token(ctx, next)
@@ -9,7 +11,15 @@ class Token {
         }
         if (Token.tokenUris.includes(uri)) {
           if (ctx.cookies.get("token")) {
-              await next();
+              let t=model.user.getToken(ctx.cookies.get("token"));
+              if (t&&t.tokendate&&t.tokendate>(new Date()).getTime()) {
+                await next();
+              }
+              else{
+                ctx.body={code:9999};
+                throw "登录过期";
+              }
+
           } else {
               // ctx.cookies.set("token", "token");
               throw "傻逼，你没登录";
@@ -21,6 +31,9 @@ class Token {
         }
 
     }
-
+    static createToken(user)
+    {
+      return crypto.createHash('md5').update(user).digest('hex');
+    }
 }
 export default Token;

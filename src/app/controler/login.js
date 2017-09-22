@@ -1,10 +1,12 @@
 import model from '../model'
-
+import token from '../util/token'
 class Login{
   static async login(ctx)
   {
       if (model.user.login(ctx.request.body.user,ctx.request.body.password)) {
-        ctx.cookies.set("token", "token",{
+        let t=token.createToken(ctx.request.body.user);
+        model.user.setToken(ctx.request.body.user,t);
+        ctx.cookies.set("token", t,{
           // domain: 'localhost',  // 写cookie所在的域名
           // path: '/index',       // 写cookie所在的路径
           maxAge: 30 * 24 * 60 * 60 * 1000, // cookie有效时长

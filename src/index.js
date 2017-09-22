@@ -4,7 +4,7 @@ import koaBody from 'koa-body'
 import router from './app/router'
 import bodyParser from 'koa-bodyparser'
 import koa_static from 'koa-static'
-import token from './app/token'
+import token from './app/util/token'
 let app = new Koa();
 app.use(koa_static(path.join( __dirname,  '../web')));
 app.use(koa_static(path.join( __dirname,  '../uploads')));

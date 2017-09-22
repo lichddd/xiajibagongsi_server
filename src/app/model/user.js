@@ -13,5 +13,17 @@ class Model {
     }
     return false;
   }
+  static setToken(user,token)
+  {
+    var _date=new Date();
+    _date.setDate(_date.getDate()+30);
+    Model.db.get('users').find({user:user}).assign({token:token,tokendate:_date.getTime()}).write();
+  }
+  static getToken(token)
+  {
+    return Model.db.get('users').find({token:token}).value();
+  }
+
+
 }
 export default Model
