@@ -22,7 +22,7 @@ class UploadFile{
       arr.push(Object.assign({name:f},s));
       allsize+=s.size;
     });
-    return {allsize:allsize,list:arr};
+    return {allsize:allsize,maxsize:200000000,list:arr};
   }
   static delUploaded(name)
   {

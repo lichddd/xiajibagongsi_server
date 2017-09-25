@@ -1,5 +1,7 @@
 import crypto from 'crypto'
 import model from '../model'
+import language from '../language'
+
 class Token {
     static tokenUris=["admin"];
     static async token(ctx, next)
@@ -22,7 +24,7 @@ class Token {
 
           } else {
               // ctx.cookies.set("token", "token");
-              throw "傻逼，你没登录";
+              throw language(ctx).errors.no_token;
           }
         }
         else

@@ -7,7 +7,7 @@
     "start": "babel-node src/index",
     "debug": "babel-node-debug src/index",
     "build": "babel src --out-dir dist",
-    "dev": "NODE_ENV=development nodemon --exec npm run start"
+    "dev": "set NODE_ENV=development && nodemon --exec npm run start"
   },
   "author": "",
   "license": "MIT",
