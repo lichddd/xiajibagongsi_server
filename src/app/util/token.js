@@ -23,8 +23,7 @@ class Token {
               }
 
           } else {
-              // ctx.cookies.set("token", "token");
-              throw language(ctx).errors.no_token;
+              throw language.language(ctx).errors.no_token;
           }
         }
         else
