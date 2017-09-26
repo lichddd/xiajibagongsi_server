@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import fileutil from './fileutil'
-fileutil.mkdirIfNotExist('./uploads/');
+
 class UploadFile{
   static upload(file)
   {
