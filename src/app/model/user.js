@@ -23,7 +23,10 @@ class Model {
   {
     return Model.db.get('users').find({token:token}).value();
   }
-
+  static delToken(token)
+  {
+    return Model.db.get('users').remove({token:token}).write();
+  }
 
 }
 export default Model

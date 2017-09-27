@@ -6,13 +6,15 @@ homepage.get('uploads', controler.homepage.uploads);
 let login = new Router();
 login.post('login', controler.login.login);
 let admin = new Router();
-admin.get('uploads', controler.admin.uploads)
+admin.get('info', controler.admin.info)
+     .get('uploads', controler.admin.uploads)
      .del('deluploaded/:name', controler.admin.deluploaded)
      .post('upload', controler.admin.upload)
      .get('getnews', controler.admin.getnews)
      .post('addnews', controler.admin.addnews)
      .put('editnews/:id', controler.admin.editnews)
-     .del('delnews/:id', controler.admin.delnews);
+     .del('delnews/:id', controler.admin.delnews)
+     .post('changenewssort',controler.admin.changenewssort);
 
 let router = new Router();
 router.use('/', homepage.routes(), homepage.allowedMethods());

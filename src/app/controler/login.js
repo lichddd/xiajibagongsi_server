@@ -1,5 +1,6 @@
 import model from '../model'
 import token from '../util/token'
+import language from '../language'
 class Login{
   static async login(ctx)
   {
@@ -18,7 +19,7 @@ class Login{
       }
       else
       {
-        throw "用户名密码不正确";
+        throw language.language(ctx).errors.bad_user_password;
       }
 
   }

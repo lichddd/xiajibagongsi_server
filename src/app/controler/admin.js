@@ -37,5 +37,15 @@ class Admin{
   {
     ctx.body=model.news.getData(ctx.query);
   }
+  static async changenewssort(ctx)
+  {
+    model.news.changeSort(ctx.request.body);
+  }
+  static async info(ctx)
+  {
+    ctx.body={};
+    ctx.body=Object.assign(ctx.body,uploadfile.getUploads());
+    // model.news.changeSort(ctx.request.body);
+  }
 }
 export default Admin;

@@ -1,6 +1,7 @@
 import low from 'lowdb'
 import FileSync from 'lowdb/adapters/FileSync'
 import shortid from 'shortid'
+import sort from '../util/sort'
 
 class Model {
   static db = low(new FileSync('db/news.json'))
@@ -11,12 +12,11 @@ class Model {
         return true;
       }
       return false;
-
-    }).value()};
+    }).sortBy("sort").take(params.limite?params.limite:9999).value()};
   }
   static addData(params)
   {
-    Model.db.get('news').push(Object.assign({id:shortid.generate()},params)).write();
+    Model.db.get('news').push(Object.assign({id:shortid.generate(),sort:sort.next(Model.db.get('news'))},params)).write();
   }
   static editData(params,data)
   {
@@ -25,6 +25,11 @@ class Model {
   static delData(params)
   {
     Model.db.get('news').remove({ id: params.id }).write();
+  }
+  static changeSort(data){
+    Model.db.get('news').find({ id: data.ida }).assign({sort:data.sortb}).value();
+    Model.db.get('news').find({ id: data.idb }).assign({sort:data.sorta}).value();
+    Model.db.write();
   }
 }
 export default Model

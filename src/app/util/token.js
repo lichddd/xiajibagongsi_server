@@ -18,11 +18,13 @@ class Token {
                 await next();
               }
               else{
+                model.user.delToken(ctx.cookies.get("token"));
                 ctx.body={code:9999};
-                throw "登录过期";
+                throw language.language(ctx).errors.old_token;;
               }
 
           } else {
+              ctx.body={code:9999};
               throw language.language(ctx).errors.no_token;
           }
         }
@@ -34,7 +36,7 @@ class Token {
     }
     static createToken(user)
     {
-      return crypto.createHash('md5').update(user).digest('hex');
+      return crypto.createHash('md5').update(user+(new Date()).getTime()).digest('hex');
     }
 }
 export default Token;

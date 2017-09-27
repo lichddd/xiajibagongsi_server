@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 class UploadFile{
+  static maxsize=1024*1024*1024
   static upload(file)
   {
     const reader = fs.createReadStream(file.path);
@@ -21,7 +22,7 @@ class UploadFile{
       arr.push(Object.assign({name:f},s));
       allsize+=s.size;
     });
-    return {allsize:allsize,maxsize:200000000,list:arr};
+    return {allsize:allsize,maxsize:UploadFile.maxsize,list:arr};
   }
   static delUploaded(name)
   {
