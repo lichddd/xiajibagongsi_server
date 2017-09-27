@@ -44,8 +44,9 @@ class Admin{
   static async info(ctx)
   {
     ctx.body={};
-    ctx.body=Object.assign(ctx.body,uploadfile.getUploads());
-    // model.news.changeSort(ctx.request.body);
+    let {allsize,dbsize,filecount,maxsize}=uploadfile.info()
+    ctx.body=Object.assign(ctx.body,{info:{allsize,dbsize,maxsize,filecount,newscount:model.news.count()}});
+
   }
 }
 export default Admin;

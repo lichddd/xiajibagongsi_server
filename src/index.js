@@ -1,3 +1,5 @@
+import plugin from './app/plugin'
+
 import path from 'path'
 import Koa from 'koa'
 import koaBody from 'koa-body'
@@ -5,12 +7,14 @@ import router from './app/router'
 import bodyParser from 'koa-bodyparser'
 import koa_static from 'koa-static'
 import token from './app/util/token'
+import visit from './app/util/visit'
 import fileutil from './app/util/fileutil'
 
 let app = new Koa();
 
 fileutil.mkdirIfNotExist('./web/');
 fileutil.mkdirIfNotExist('./uploads/');
+app.use(visit.visit);
 app.use(koa_static(path.resolve('./web')));
 app.use(koa_static(path.resolve('./uploads')));
 app.use(async (ctx,next)=>{

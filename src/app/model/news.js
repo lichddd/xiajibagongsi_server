@@ -31,5 +31,8 @@ class Model {
     Model.db.get('news').find({ id: data.idb }).assign({sort:data.sorta}).value();
     Model.db.write();
   }
+  static count(){
+    return Model.db.get('news').size().value();
+  }
 }
 export default Model
