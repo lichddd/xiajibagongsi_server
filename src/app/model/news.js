@@ -12,7 +12,7 @@ class Model {
         return true;
       }
       return false;
-    }).sortBy("sort").take(params.limite?params.limite:9999).value()};
+    }).orderBy("sort","desc").take(params.limite?params.limite:9999).value()};
   }
   static addData(params)
   {
