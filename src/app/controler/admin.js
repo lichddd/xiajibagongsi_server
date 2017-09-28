@@ -45,7 +45,7 @@ class Admin{
   {
     ctx.body={};
     let {allsize,dbsize,filecount,maxsize}=uploadfile.info()
-    ctx.body=Object.assign(ctx.body,{info:{allsize,dbsize,maxsize,filecount,newscount:model.news.count()}});
+    ctx.body=Object.assign(ctx.body,{info:{allsize,dbsize,maxsize,filecount,newscount:model.news.count(),visit:model.visit.getData()}});
 
   }
 }

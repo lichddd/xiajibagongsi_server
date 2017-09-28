@@ -18,5 +18,9 @@ class Model {
     }
 
   }
+  static getData()
+  {
+      return Model.db.value();
+  }
 }
 export default Model
