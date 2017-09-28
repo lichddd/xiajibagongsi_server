@@ -14,6 +14,19 @@ class Model {
       return false;
     }).orderBy("sort","desc").take(params.limite?params.limite:9999).value()};
   }
+  static getTitleData(params)
+  {
+    return {news:Model.db.get('news').filter((n)=>{
+      if (n.title.search(params.keyword)>=0) {
+        return true;
+      }
+      return false;
+    }).orderBy("sort","desc").map((o)=>{return {id:o.id,title:o.title}}).take(params.limite?params.limite:9999).value()};
+  }
+  static getHtmlData(params)
+  {
+    return {news:Model.db.get('news').find({id:params.id}).value()};
+  }
   static addData(params)
   {
     Model.db.get('news').push(Object.assign({id:shortid.generate(),sort:sort.next(Model.db.get('news'))},params)).write();

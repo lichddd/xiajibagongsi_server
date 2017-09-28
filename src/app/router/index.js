@@ -2,7 +2,9 @@ import Router from 'koa-router'
 import controler from '../controler'
 
 let homepage = new Router();
-homepage.get('uploads', controler.homepage.uploads);
+homepage.get('uploads', controler.homepage.uploads)
+        .get('getTitle', controler.homepage.getTitle)
+        .get('getHtml', controler.homepage.getHtml);
 let login = new Router();
 login.post('login', controler.login.login);
 let admin = new Router();
