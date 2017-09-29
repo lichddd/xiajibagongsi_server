@@ -36,7 +36,7 @@ class Message {
               Message.users[myname]=null;
               delete Message.users[myname];
             }, 30000);
-            return Message.users[myname].list.slice(last,Message.users[myname].list.length);
+            return {lastID:Message.users[myname].lastID,list:Message.users[myname].list.slice(last,Message.users[myname].list.length)};
         } else {
             return new Promise((resolve, reject) => {
                     let st=setTimeout(async() => {
@@ -46,7 +46,7 @@ class Message {
                         Message.users[myname]=null;
                         delete Message.users[myname];
                       }, 30000);
-                        resolve([]);
+                        resolve({lastID:Message.users[myname].lastID,list:[]});
                     }, 20000);
                     Message.users[myname].callback=(data)=>{
                       clearTimeout(st);
@@ -56,7 +56,7 @@ class Message {
                         Message.users[myname]=null;
                         delete Message.users[myname];
                       }, 30000);
-                        resolve([data]);
+                        resolve({lastID:Message.users[myname].lastID,list:[data]});
                     };
                 });
         }
