@@ -4,6 +4,8 @@ import controler from '../controler'
 let homepage = new Router();
 homepage.get('uploads', controler.homepage.uploads)
         .get('getTitle', controler.homepage.getTitle)
+        .get('sendMsg', controler.homepage.sendMsg)
+        .get('getMsg', controler.homepage.getMsg)
         .get('getHtml', controler.homepage.getHtml);
 let login = new Router();
 login.post('login', controler.login.login);
