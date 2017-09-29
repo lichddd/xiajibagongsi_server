@@ -20,7 +20,7 @@ class HomePage{
   }
   static async getMsg(ctx)
   {
-    ctx.body={msg:await message.getMsg(ctx.query.lastID,ctx.query.name)};
+    ctx.body={msg:await message.getMsg(ctx.query.name)};
   }
 }
 export default HomePage;
