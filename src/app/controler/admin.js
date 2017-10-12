@@ -1,5 +1,6 @@
 import model from '../model'
 import uploadfile from '../util/uploadfile'
+import message from '../util/message'
 class Admin{
   static async upload(ctx)
   {
@@ -47,6 +48,18 @@ class Admin{
     let {allsize,dbsize,filecount,maxsize}=uploadfile.info()
     ctx.body=Object.assign(ctx.body,{info:{allsize,dbsize,maxsize,filecount,newscount:model.news.count(),visit:model.visit.getData()}});
 
+  }
+  static async sendMsg(ctx)
+  {
+    message.sendMsg(ctx.request.body.body,ctx.request.body.target,ctx.request.body.source);
+  }
+  static async readMsg(ctx)
+  {
+    message.readMsg(ctx.request.body.lastID,ctx.request.body.myname);
+  }
+  static async getMsg(ctx)
+  {
+    ctx.body={msg:await message.getMsg(ctx.query.name)};
   }
 }
 export default Admin;

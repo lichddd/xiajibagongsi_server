@@ -7,7 +7,14 @@
     "start": "babel-node src/index",
     "debug": "babel-node-debug src/index",
     "build": "babel src --out-dir dist",
-    "dev": "set NODE_ENV=development && nodemon --exec npm run start"
+    "dev": "set NODE_ENV=development && nodemon --exec npm run start",
+    "pm2start": "pm2 start ./dist/index.js",
+    "pm2list": "pm2 list",
+    "pm2logs": "pm2 logs",
+    "pm2monit":"pm2 monit",
+    "pm2web":"pm2 web",
+    "pm2deleteall":"pm2 delete all",
+    "pm2stopall":"pm2 stop all"
   },
   "author": "",
   "license": "MIT",
@@ -18,6 +25,7 @@
     "koa-router": "^7.2.1",
     "koa-static": "^4.0.1",
     "lowdb": "^1.0.0",
+    "pm2": "^2.7.1",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
