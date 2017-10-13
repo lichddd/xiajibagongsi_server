@@ -5,7 +5,6 @@ let homepage = new Router();
 homepage.get('uploads', controler.homepage.uploads)
         .get('getTitle', controler.homepage.getTitle)
         .get('sendMsg', controler.homepage.sendMsg)
-        .post('readMsg', controler.homepage.readMsg)
         .get('getMsg', controler.homepage.getMsg)
         .get('getHtml', controler.homepage.getHtml);
 let login = new Router();
@@ -21,7 +20,6 @@ admin.get('info', controler.admin.info)
      .del('delnews/:id', controler.admin.delnews)
      .post('changenewssort',controler.admin.changenewssort)
      .post('sendMsg', controler.admin.sendMsg)
-     .post('readMsg', controler.admin.readMsg)
      .get('getMsg', controler.admin.getMsg);
 
 let router = new Router();

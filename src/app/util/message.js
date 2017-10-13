@@ -4,10 +4,10 @@ class Message {
     static users={}
     static addMsg(target,source,data,all=false)
     {
-      Message.users[target].list.push({target:all?"":target,source:source,data:{text:data,time:(new Date()).Format("YYYY-MM-DD")}});
+      Message.users[target].list.push({target:all?"":target,source:source,data:{text:data,time:(new Date()).Format("YYYY-MM-DD hh:mm")}});
       Message.users[target].lastID += 1;
       if (Message.users[target].callback) {
-        Message.users[target].callback({target:all?"":target,source:source,data:{text:data,time:(new Date()).Format("YYYY-MM-DD")}});
+        Message.users[target].callback({target:all?"":target,source:source,data:{text:data,time:(new Date()).Format("YYYY-MM-DD hh:mm")}});
       }
     }
     static removeUser(name)
@@ -34,14 +34,11 @@ class Message {
           }
         }
     }
-    static readMsg(lastID,myname)
+    static async getMsg(myname,lastID)
     {
-        if (Message.users[myname]) {
+        if (Message.users[myname]&&lastID) {
             Message.users[myname].currentID=lastID;
         }
-    }
-    static async getMsg(myname)
-    {
         if (!Message.users[myname]) {
           Message.users[myname]={callback:null,name:myname,list:[],currentID:null,lastID:0,delcallback:null};
         }
@@ -52,7 +49,6 @@ class Message {
         let last=Message.users[myname].currentID||0;
         if (last < Message.users[myname].lastID) {
             Message.removeUser(myname);
-            // Message.users[myname].currentID=Message.users[myname].lastID;
             return {lastID:Message.users[myname].lastID,list:Message.users[myname].list.slice(last,Message.users[myname].list.length)};
         } else {
             return new Promise((resolve, reject) => {
@@ -65,13 +61,11 @@ class Message {
                       clearTimeout(st);
                       Message.users[myname].callback=null;
                       Message.removeUser(myname);
-                      // Message.users[myname].currentID=Message.users[myname].lastID;
                       if (data) {
                         resolve({lastID:Message.users[myname].lastID,list:[data]});
                       } else {
                         resolve({lastID:null,list:null});
                       }
-
                     };
                 });
         }

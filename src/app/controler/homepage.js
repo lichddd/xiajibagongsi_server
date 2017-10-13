@@ -18,13 +18,9 @@ class HomePage{
   {
     message.sendMsg(ctx.query.body,ctx.query.target,ctx.query.source);
   }
-  static async readMsg(ctx)
-  {
-    message.readMsg(ctx.query.lastID,ctx.query.myname);
-  }
   static async getMsg(ctx)
   {
-    ctx.body={msg:await message.getMsg(ctx.query.name)};
+    ctx.body={msg:await message.getMsg(ctx.query.name,ctx.query.lastID)};
   }
 }
 export default HomePage;

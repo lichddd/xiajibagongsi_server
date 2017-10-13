@@ -53,13 +53,9 @@ class Admin{
   {
     message.sendMsg(ctx.request.body.body,ctx.request.body.target,ctx.request.body.source);
   }
-  static async readMsg(ctx)
-  {
-    message.readMsg(ctx.request.body.lastID,ctx.request.body.myname);
-  }
   static async getMsg(ctx)
   {
-    ctx.body={msg:await message.getMsg(ctx.query.name)};
+    ctx.body={msg:await message.getMsg(ctx.query.name,ctx.query.lastID)};
   }
 }
 export default Admin;
