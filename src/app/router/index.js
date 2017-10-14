@@ -23,7 +23,7 @@ admin.get('info', controler.admin.info)
      .get('getMsg', controler.admin.getMsg);
 
 let router = new Router();
-router.use('/', homepage.routes(), homepage.allowedMethods());
+router.use('/homepage', homepage.routes(), homepage.allowedMethods());
 router.use('/admin/', admin.routes(), admin.allowedMethods());
 router.use('/', login.routes(), login.allowedMethods());
 
