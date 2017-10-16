@@ -4,7 +4,7 @@ import controler from '../controler'
 let homepage = new Router();
 homepage.get('uploads', controler.homepage.uploads)
         .get('getTitle', controler.homepage.getTitle)
-        .get('sendMsg', controler.homepage.sendMsg)
+        .post('sendMsg', controler.homepage.sendMsg)
         .get('getMsg', controler.homepage.getMsg)
         .get('getHtml', controler.homepage.getHtml);
 let login = new Router();
@@ -23,7 +23,7 @@ admin.get('info', controler.admin.info)
      .get('getMsg', controler.admin.getMsg);
 
 let router = new Router();
-router.use('/', homepage.routes(), homepage.allowedMethods());
+router.use('/homepage/', homepage.routes(), homepage.allowedMethods());
 router.use('/admin/', admin.routes(), admin.allowedMethods());
 router.use('/', login.routes(), login.allowedMethods());
 

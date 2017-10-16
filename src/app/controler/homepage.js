@@ -16,7 +16,7 @@ class HomePage{
   }
   static async sendMsg(ctx)
   {
-    message.sendMsg(ctx.query.body,ctx.query.target,ctx.query.source);
+    message.sendMsg(ctx.request.body.body,ctx.request.body.target,ctx.request.body.source);
   }
   static async getMsg(ctx)
   {
