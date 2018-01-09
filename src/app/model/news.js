@@ -21,7 +21,7 @@ class Model {
         return true;
       }
       return false;
-    }).orderBy("sort","desc").map((o)=>{return {id:o.id,title:o.title}}).take(params.limite?params.limite:9999).value()};
+    }).orderBy("sort","desc").map((o)=>{return {id:o.id,title:o.title,img:(o.html.match(/<img[^>]*>/)?(o.html.match(/<img[^>]*>/)[0]?o.html.match(/<img[^>]*>/)[0]:``):``)}}).take(params.limite?params.limite:9999).value()};
   }
   static getHtmlData(params)
   {
