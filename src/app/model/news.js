@@ -23,7 +23,6 @@ class Model {
       }
       return false;
     }).orderBy("sort","desc").map((o)=>{
-      console.log(conf);
       let img=(o.html.match(/<img[^>]*>/)?(o.html.match(/<img[^>]*>/)[0]?o.html.match(/<img[^>]*>/)[0]:``):``);
 
       if(conf.pre_uri&&img.match(conf.pre_uri)){
