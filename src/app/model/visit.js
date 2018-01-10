@@ -1,8 +1,8 @@
 import low from 'lowdb'
 import FileSync from 'lowdb/adapters/FileSync'
-
+import db_conf from './defaultdb'
 class Model {
-  static db = low(new FileSync('db/visit.json'))
+  static db = low(new FileSync(`${db_conf.db_path}visit.json`))
   static visit()
   {
     Model.db.set('allcount',Model.db.get('allcount').value()+1).write();

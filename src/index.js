@@ -9,15 +9,15 @@ import koa_static from 'koa-static'
 import token from './app/util/token'
 import visit from './app/util/visit'
 import fileutil from './app/util/fileutil'
+import uploadfile from './app/util/uploadfile'
 
 let app = new Koa();
 
 fileutil.mkdirIfNotExist('./web/');
-fileutil.mkdirIfNotExist('./uploads/');
-fileutil.mkdirIfNotExist('./uploads/small/');
+
 app.use(visit.visit);
 app.use(koa_static(path.resolve('./web')));
-app.use(koa_static(path.resolve('./uploads')));
+app.use(koa_static(path.resolve(uploadfile.img_path)));
 app.use(async (ctx,next)=>{
   try {await next();}
   catch (e) {

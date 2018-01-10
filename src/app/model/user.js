@@ -2,9 +2,9 @@ import crypto from 'crypto'
 import low from 'lowdb'
 import FileSync from 'lowdb/adapters/FileSync'
 import shortid from 'shortid'
-
+import db_conf from './defaultdb'
 class Model {
-  static db = low(new FileSync('db/user.json'))
+  static db = low(new FileSync(`${db_conf.db_path}user.json`))
   static login(user,password)
   {
     let u=Model.db.get('users').find({user:user}).value();

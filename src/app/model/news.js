@@ -3,8 +3,9 @@ import FileSync from 'lowdb/adapters/FileSync'
 import shortid from 'shortid'
 import sort from '../util/sort'
 import conf from '../conf'
+import db_conf from './defaultdb'
 class Model {
-  static db = low(new FileSync('db/news.json'))
+  static db = low(new FileSync(`${db_conf.db_path}news.json`))
   static getData(params)
   {
     return {news:Model.db.get('news').filter((n)=>{
