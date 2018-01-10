@@ -11,14 +11,15 @@
     "pm2start": "pm2 start ./dist/index.js",
     "pm2list": "pm2 list",
     "pm2logs": "pm2 logs",
-    "pm2monit":"pm2 monit",
-    "pm2web":"pm2 web",
-    "pm2deleteall":"pm2 delete all",
-    "pm2stopall":"pm2 stop all"
+    "pm2monit": "pm2 monit",
+    "pm2web": "pm2 web",
+    "pm2deleteall": "pm2 delete all",
+    "pm2stopall": "pm2 stop all"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "jimp": "^0.2.28",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
     "koa-bodyparser": "^4.2.0",

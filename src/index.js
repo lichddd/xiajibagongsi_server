@@ -14,6 +14,7 @@ let app = new Koa();
 
 fileutil.mkdirIfNotExist('./web/');
 fileutil.mkdirIfNotExist('./uploads/');
+fileutil.mkdirIfNotExist('./uploads/small/');
 app.use(visit.visit);
 app.use(koa_static(path.resolve('./web')));
 app.use(koa_static(path.resolve('./uploads')));

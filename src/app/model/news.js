@@ -2,7 +2,7 @@ import low from 'lowdb'
 import FileSync from 'lowdb/adapters/FileSync'
 import shortid from 'shortid'
 import sort from '../util/sort'
-
+import conf from '../conf'
 class Model {
   static db = low(new FileSync('db/news.json'))
   static getData(params)
@@ -21,7 +21,27 @@ class Model {
         return true;
       }
       return false;
-    }).orderBy("sort","desc").map((o)=>{return {id:o.id,title:o.title,img:(o.html.match(/<img[^>]*>/)?(o.html.match(/<img[^>]*>/)[0]?o.html.match(/<img[^>]*>/)[0]:``):``)}}).take(params.limite?params.limite:9999).value()};
+    }).orderBy("sort","desc").map((o)=>{
+      console.log(conf);
+      let img=(o.html.match(/<img[^>]*>/)?(o.html.match(/<img[^>]*>/)[0]?o.html.match(/<img[^>]*>/)[0]:``):``);
+
+      if(conf.pre_uri&&img.match(conf.pre_uri)){
+
+        img=img.replace(`src="${conf.pre_uri}`,`src="${conf.pre_uri}small/`);
+
+      }
+      else if (img.match(/src="http:\/\/|src="https:\/\//)&&img.match(/src="http:\/\/|src="https:\/\//)[0]) {
+
+      }
+      else
+      {
+        img=img.replace('src="','src="small/')
+      }
+      return {id:o.id,title:o.title,img:img};
+
+
+
+    }).take(params.limite?params.limite:9999).value()};
   }
   static getHtmlData(params)
   {

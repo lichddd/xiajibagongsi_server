@@ -1,14 +1,15 @@
 import model from '../model'
 import uploadfile from '../util/uploadfile'
 import message from '../util/message'
+import conf from '../conf'
 class Admin{
   static async upload(ctx)
   {
     let urllist=[];
     for (var file in ctx.request.body.files) {
       if (ctx.request.body.files[file].path) {
-          let pre_uri=process.env.NODE_ENV=="development"?"http://localhost:8081/":"";
-          urllist.push(pre_uri+uploadfile.upload(ctx.request.body.files[file]));
+          // let pre_uri=process.env.NODE_ENV=="development"?"http://localhost:8081/":"";
+          urllist.push(conf.pre_uri+await uploadfile.upload(ctx.request.body.files[file]));
       }
     }
 
