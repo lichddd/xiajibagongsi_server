@@ -2,12 +2,13 @@ import fs from 'fs'
 import path from 'path'
 import jimp from 'jimp'
 import fileutil from './fileutil'
+import conf from '../conf'
 
 class UploadFile{
-  static maxsize=1024*1024*1024;
+  static maxsize=1024*1024*1024*10;
   static pic_resize={width:200,height:200,quality:40};
-  static img_path='./uploads/';
-  static small_img_path='./uploads/small/';
+  static img_path=`${conf.pre_path}uploads/`;
+  static small_img_path=`${conf.pre_path}uploads/small/`;
   static small_prefix='small';
   static pic_write_type='.png';
   static async upload(file)
@@ -78,9 +79,9 @@ class UploadFile{
       allsize+=s.size;
       filecount+=1;
     });
-    dir = fs.readdirSync(path.resolve('./db/'));
+    dir = fs.readdirSync(path.resolve(`${conf.pre_path}db`));
     dir.forEach((f)=>{
-      let s=fs.statSync(path.resolve('./db/',f))
+      let s=fs.statSync(path.resolve(`${conf.pre_path}db`,f));
       arr.push(Object.assign({name:f},s));
       dbsize+=s.size;
     });

@@ -1,10 +1,10 @@
 import fileutil from '../util/fileutil'
 import low from 'lowdb'
 import FileSync from 'lowdb/adapters/FileSync'
-
+import conf from '../conf'
 
 class Model {
-  static db_path='./db/'
+  static db_path=`${conf.pre_path}db/`
 }
 fileutil.mkdirIfNotExist(Model.db_path);
 
