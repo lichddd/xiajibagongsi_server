@@ -31,5 +31,7 @@ app.use(koaBody({ multipart: true }));
 app.use(token.token);
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
-app.listen(8081);
-console.log('[demo] start-quick is starting at port 8081');
+
+export default app.listen(8081, () => {
+  console.log(`Koa is listening in 8081`)
+})

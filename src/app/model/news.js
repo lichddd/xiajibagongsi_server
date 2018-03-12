@@ -37,7 +37,7 @@ class Model {
       {
         img=img.replace('src="','src="small/')
       }
-      return {id:o.id,title:o.title,img:img};
+      return {id:o.id,sort:o.sort,title:o.title,img:img};
 
 
 

@@ -14,7 +14,18 @@
     "pm2monit": "pm2 monit",
     "pm2web": "pm2 web",
     "pm2deleteall": "pm2 delete all",
-    "pm2stopall": "pm2 stop all"
+    "pm2stopall": "pm2 stop all",
+    "test": "jest"
+  },
+  "jest": {
+    "verbose": true,
+    "coverageDirectory": "coverage",
+    "mapCoverage": true,
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ]
   },
   "author": "",
   "license": "MIT",
@@ -30,6 +41,7 @@
     "shortid": "^2.2.8"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
@@ -38,7 +50,9 @@
     "babel-plugin-transform-es2015-spread": "^6.22.0",
     "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "nodemon": "^1.11.0"
+    "jest": "^22.4.2",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   },
   "engines": {
     "node": ">= 7.6.0",
