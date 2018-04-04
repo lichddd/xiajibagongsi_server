@@ -9,7 +9,7 @@ for (var key in r) {
                     ? p.allows[i]
                     : "";
                 if (!p.allows[i].match(p.pattern)) {
-                    console.error(`
+                    console.log(`
 ${p.desc}
 允许字符串不合法 `, `\x1B[36m${p.allows[i]}`);
                 }
@@ -20,7 +20,7 @@ ${p.desc}
                     ? p.notallows[j]
                     : "";
                 if (p.notallows[j].match(p.pattern)) {
-                    console.error(`
+                    console.log(`
 ${p.desc}
 不允许字符串合法 `, `\x1B[36m${p.notallows[j]}`);
                 }
@@ -30,27 +30,27 @@ ${p.desc}
         if (p.validator) {
             let str_a = ""
             for (var i = 0; i < p.allows.length; i++) {
-                p.validator()(null, p.allows[i], (str) => {
+                p.validator(p.allows[i].vue)(null, p.allows[i].value, (str) => {
                     str_a += str
                         ? str
                         : "";
                     if (str) {
-                        console.error(`
+                        console.log(`
 ${p.desc}
-允许字符串不合法 `, `\x1B[36m${p.allows[i]}`);
+允许字符串不合法 `, `\x1B[36m${p.allows[i].value}`);
                     }
                 })
             }
             let str_n = "";
             for (var j = 0; j < p.notallows.length; j++) {
-                p.validator()(null, p.notallows[j], (str) => {
+                p.validator(p.notallows[j].vue)(null, p.notallows[j].value, (str) => {
                     str_n += (!str)
                         ? str
                         : "";
                     if (!str) {
-                        console.error(`
+                        console.log(`
 ${p.desc}
-不允许字符串合法 `, `\x1B[36m${p.notallows[j]}`);
+不允许字符串合法 `, `\x1B[36m${p.notallows[j].value}`);
                     }
                 })
             }
@@ -58,4 +58,4 @@ ${p.desc}
         }
     });
 }
-console.log(`---------------------------------------------------------------`);
+console.log(`\x1B[36m详细信息---------------------------------------------------------------`);

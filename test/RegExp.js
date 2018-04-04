@@ -16,8 +16,8 @@ export default {
       callback("error");
     }},
     desc:"number的正则表达式,1-9",
-    allows:[1,2,3,4,5,6,7,8,9,1111],
-    notallows:[0,11,12,13,14,1],
+    allows:[{vue:null,value:1},{vue:null,value:2},{vue:null,value:3},{vue:null,value:1111}],
+    notallows:[{vue:null,value:0},{vue:null,value:11},{vue:null,value:12},{vue:null,value:1}],
   }
 
 
